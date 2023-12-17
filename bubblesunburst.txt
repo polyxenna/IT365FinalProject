@@ -1,0 +1,42 @@
+BUBBLE CHART
+# Set up the color palette for the age gradient
+age_palette = sns.color_palette("viridis", as_cmap=True)
+
+# Create the bubble plot
+plt.figure(figsize=(10, 8))
+bubble_plot = sns.scatterplot(x='Thalach', y='Age', hue='Heart-Disease', size='Ca', data=data,
+                              palette="viridis", sizes=(100, 1000), alpha=0.7, legend='brief')
+
+# Customize the plot
+plt.title('Bubble Plot of Maximum Heart Rate vs. Age with Heart Disease Status')
+plt.xlabel('Maximum Heart Rate (Thalach)')
+plt.ylabel('Age')
+
+# Adjust the legend
+legend = plt.legend(title='Heart Disease', labels=['No', 'Yes'])
+legend.legendHandles[0]._sizes = [80]
+legend.legendHandles[1]._sizes = [80]
+
+
+# Show the plot
+plt.show()
+
+#The 'ca' column is used for the size of the bubbles, representing the number of major vessels. 
+#The 'hue' parameter is used to differentiate between individuals with and without heart disease. 
+
+
+
+
+SUNBURST CHART
+# Filter data for individuals with ages 29 and 30
+filtered_df = data[(data['Age'] >= 29) & (data['Age'] <= 40)]
+
+# Create a Sunburst Chart
+fig = px.sunburst(filtered_df, path=['Thal', 'Age', 'Heart-Disease'], 
+                  title='Prevalence of Thalassemia Types in Ages 29 to 40',
+                  color='Thal',
+                  color_discrete_map={'0': 'lightblue', '1': 'lightgreen', '2': 'lightcoral', '3': 'lightpink'},
+                  height=600)
+# Show the plot
+fig.show()
+
